@@ -64,3 +64,109 @@
 .login a{
     color:black;
 }
+
+
+ nav{
+    padding-right: 70px;
+    padding-left: 70px;
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    height: 10vh;
+    background-color: rgb(70, 10, 236);
+    color: white;
+}
+
+
+
+   .Register nav .link1{
+   
+     color: white;
+     text-decoration: none;
+     background-color: brown;
+     padding: 10px;
+     border:none;
+     border-radius: 5px;
+
+ }
+
+  .Dashboard nav .nav-com{
+    
+    display: flex;
+    justify-content: center;
+    gap:12px;
+    float:right;
+    align-items: center;
+    color: white;
+ }
+
+ .Register nav .nav-com1{
+    
+    display: flex;
+    justify-content: center;
+    gap:15px;
+    float: right;
+    align-items: center;
+    color: white;
+ }
+
+
+ .Dashboard nav img{
+
+     width:30px;
+     margin-right: 20px;
+     border:1px solid white;
+     border-radius: 50%;
+ }
+
+ .Register nav img{
+
+    width:30px;
+    margin-right: 20px;
+    border:1px solid white;
+    border-radius: 50%;
+ }
+
+ table{
+    margin:auto;
+    width:1200px;
+    border: 1px solid black;
+    /* display: flex; */
+  
+    border-collapse: collapse;
+    /* border-collapse: collapse; */
+    
+ }
+ th{
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: aqua;
+ }
+
+ tr{
+    border: 1px solid black;
+ }
+
+ td{
+    border: 1px solid black;
+    
+     
+    
+ }
+
+ 
+
+  
+
+
+/* .Register .container{
+    padding:50px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     flex-wrap: wrap;
+     flex-direction: row;
+ } */
+
+ 

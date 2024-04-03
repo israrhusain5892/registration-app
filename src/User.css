@@ -1,0 +1,66 @@
+ .Register .container-prod{
+    margin: auto;
+    width:1100px;
+    padding:50px 50px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+     flex-wrap: wrap;
+     /* flex-direction: row; */
+ }
+ .card {
+   
+    padding-top: 10px;
+    width:200px; 
+    padding:10px;
+    height:370px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+
+ } 
+
+ .card:hover{
+     transform: scale(1.056);
+     background-color: rgba(0,0,0,0.1);
+ }
+
+ .card-price{
+    display: flex;
+    justify-content: space-evenly;
+ }
+
+ .card-price button{
+     background-color: blueviolet;
+     padding:6px;
+     border:none;
+     color:white;
+     border-radius: 4px;
+ }
+
+ .card-price span{
+      color:green;
+      font-size: 16px;
+      font-weight: 500;
+ }
+
+ 
+ .img{
+    margin-top: 2px;
+    width:125px;
+    object-fit:cover;
+    margin: auto;
+ }
+
+ .img img{
+    width:100%;
+    object-fit: cover;
+ }
+
+ .Register nav .links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0px;
+ }
