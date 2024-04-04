@@ -21,21 +21,21 @@ function Dashboard() {
           const user=JSON.parse(localStorage.getItem("data"));
           // console.log(user.email);
           
-          const url = `https:localhost:8080/find/user/${user.email}`;
-          useEffect(()=>{
-                 fetch(`http:localhost:8080/find/user/imran@gmail.com`).then(response=>{
-                      console.log(response)
-                 }).catch(error=>{
-                    console.log(error);
-                 })
-          },[])
+          // const url = `https:localhost:8080/find/user/${user.email}`;
+          // useEffect(()=>{
+          //        fetch(`http:localhost:8080/find/user/imran@gmail.com`).then(response=>{
+          //             console.log(response)
+          //        }).catch(error=>{
+          //           console.log(error);
+          //        })
+          // },[])
 
           // console.log(getPost(url))
          
          
 
          async function getuser1(){
-             const res2 =await axios.get(`http://localhost:8080/find/user/${user.email}`);
+             const res2 =await axios.get('http://localhost:8080/get/users');
              
                   setData(res2.data)
              }
@@ -109,7 +109,7 @@ function Dashboard() {
 
             
                  <thead>
-
+                
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
@@ -128,16 +128,19 @@ function Dashboard() {
                    
 
                  
-                    <tr>
-                      <td>{data.id}</td>
-                      <td>{data.name}</td>
-                      <td>{data.email}</td>
-                      <td>{data.loginTime}</td>
-                      <td>{data.loginDate}</td>
-                      <td>{data.logoutTime}</td>
-                      <td>{data.logoutDate}</td>
-                      
-                  </tr>
+          data.map((data,index)=>{
+               return<tr key={index}>
+                
+                    <td>{data.id}</td>
+                    <td>{data.name}</td>
+                    <td>{data.email}</td>
+                    <td>{data.loginTime}</td>
+                    <td>{data.loginDate}</td>
+                    <td>{data.logoutTime}</td>
+                    <td>{data.logoutDate}</td>
+                    
+                </tr>
+                   })
                    }  
 
                 
