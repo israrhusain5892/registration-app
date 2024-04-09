@@ -35,7 +35,7 @@ function Home() {
 
 
      async function getProducts(){
-            const products= await axios.get("https://fakestoreapi.com/products");
+            const products= await axios.get("http://localhost:8088/get/books");
             setProduct(products.data)
             console.log(products);
       }
@@ -45,7 +45,12 @@ function Home() {
       },[])
 
    
-          
+       function view(e,id){
+              e.preventDefault();
+            
+              localStorage.setItem("cardId",id);
+              navigate("/view");
+       }   
      
 
       
@@ -69,12 +74,12 @@ function Home() {
              product.map((prod)=>{
                
                return  <div class="card">
-                     <div class="img"><img src={prod.image}/></div> 
-                      <h4>{prod.title}</h4>
+                     <div class="img"><img src="https://m.media-amazon.com/images/I/41zISqNi1uL._SY445_SX342_.jpg"/></div> 
+                      <h4>{prod.bookName}</h4>
                       <div class="card-price">
 
-                      <span>Price :₹ {prod.price}</span>
-                      <button>Buy Now</button>
+                      <span>Price :₹ {prod.bookPrice}</span>
+                      <button onClick={(e)=>view(e,prod.bookId)}>view Now</button>
                       </div>
                       
                 </div>

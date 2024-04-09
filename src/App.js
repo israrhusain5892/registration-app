@@ -8,6 +8,8 @@ import Login from './Login';
 import Dashboard from './Dashboard';
 import User from './User';
 import Home from './Home';
+import Card from './Card';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard/>}></Route>
                 <Route path="/user/dashboard" element={<User/>}></Route>
                 <Route path="/" element={<Home/>}></Route>
+                <Route path="/view" element={<Card></Card>}></Route>
             </Routes>
         </BrowserRouter>
        

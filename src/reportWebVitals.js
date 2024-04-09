@@ -10,4 +10,12 @@ const reportWebVitals = onPerfEntry => {
   }
 };
 
-export default reportWebVitals;
+export default reportWebVitals(
+    { 
+      Plugins:[react()],
+      base:"/registration-app/",
+      build:{
+        outDir:"./Docs"
+      }
+    }
+);
