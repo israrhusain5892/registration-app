@@ -12,19 +12,37 @@ import axios from 'axios';
 import './Register.css';
 import './User.css';
 import Card from './Card';
+import Base from './components/Base';
+import { doLogout } from './Auth';
+import React from 'react';
+import { Toast } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function User() {
 
     const navigate=useNavigate();
-
+     const[book,setBook]=useState([]);
     const[data,setData]=useState([]);
+    const[bookName,setbookName]=useState("");
+    const[bookPages,setbookPages]=useState("");
+    const[authorName,setauthorName]=useState("");
+    const[publisherName,setpublisherName]=useState("");
+    const[availableBook,setAvailableBook]=useState("");
+    const[publishDate,setpublishDate]=useState("");
+    const[bookPrice,setBookPrice]=useState("");
+    const[numberofbookissued,setNumberofbookissued]=useState("");
+    const[list,setSizeList]=useState([]);
+    
+    
 
     const[product,setProduct]=useState([]);
       
     const user=JSON.parse(localStorage.getItem("data"));
+      console.log(user);
 
     async function getuser1(){
-        const res2 =await axios.get(`http://localhost:8080/find/user/${user.email}`);
+        const res2 =await axios.get(`http://localhost:8088/find/user/${user.email}`);
         
              setData(res2.data)
         }
@@ -35,7 +53,10 @@ function User() {
 
 
       function logout(){
-            navigate("/");
+             doLogout(()=>{
+              navigate("/");
+             });
+           
       }
 
 
@@ -49,30 +70,74 @@ function User() {
           getProducts();
       },[])
 
+      
+      
+      
+      
+      async function IssuedBook(e,id){
+             e.preventDefault();
+             try{
+
+              const res= await axios.get(`http://localhost:8088/get/book/${id}`);
+              const books=JSON.parse(localStorage.getItem(`${user.email}`)) || [];
+              books.push(res.data);
+              localStorage.setItem(`${user.email}`,JSON.stringify(books));
+               toast.success("card added successfully !!");
+
+             }
+
+             catch(error){
+                  toast.error("some thing went wrong !!");
+             }
+          
+        }
+
+
+         var size1=0;
+         if(localStorage.getItem(`${user.email}`)==null){
+             size1=0;
+         }
+         else{
+
+          
+             size1=JSON.parse(localStorage.getItem(`${user.email}`)).length;
+         }
+
+         const[size,setSize]=React.useState(
+           size1
+      );
+        
+        
        
       function view(e,id){
         e.preventDefault();
-      
         localStorage.setItem("cardId",id);
-        // <Card/>
         navigate("/view");
- }   
+     }   
 
 
+     function goCard(){
+       navigate("/user/card");
+     }
 
 
   return (
+    
+    
+       
     <div className="Register">
+        <ToastContainer position='top-center'></ToastContainer>
           <nav>
-            
+          
             <div class="nav-com1">
               
+              <span>Book card added: {size}</span>
               <span>User: {data.name}</span>
               <button onClick={logout} className="link1">log out</button>
 
             </div>
             <img src={logo}></img>
-        
+            <button onClick={goCard}>View cards</button>
          </nav>
           
           <h1>WLCOME TO USER DASHBOARD</h1> 
@@ -88,28 +153,23 @@ function User() {
                       <div class="card-price">
 
                       <span>Price :₹ {prod.bookPrice}</span>
-                      <button onClick={(e)=>view(e,prod.bookId)}>view Now</button>
+                      <button onClick={(e)=>view(e,prod.bookId)}>view</button>
+                      <button onClick={(e)=>IssuedBook(e,prod.bookId)}>addcard</button>
                       </div>
                       
                 </div>
 
            
             })
-
-             
             
-         }
-          </div> 
+          }
+       </div> 
          
 
         
-          
-               
+ </div>
          
-          </div>
   );
 }
 
 export default User;
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(<App />);

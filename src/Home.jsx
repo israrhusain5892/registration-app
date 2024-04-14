@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import './User.css';
 // import {navigate} from useNavigate;
+import Base from './components/Base';
 
 
 function Home() {
@@ -18,15 +19,15 @@ function Home() {
       
     const user=JSON.parse(localStorage.getItem("data"));
 
-    async function getuser1(){
-        const res2 =await axios.get(`http://localhost:8080/find/user/${user.email}`);
+    // async function getuser1(){
+    //     const res2 =await axios.get(`http://localhost:8080/find/user/${user.email}`);
         
-             setData(res2.data)
-        }
+    //          setData(res2.data)
+    //     }
            
-     useEffect( ()=>{
-         getuser1();
-     },[])
+    //  useEffect( ()=>{
+    //      getuser1();
+    //  },[])
 
 
       function logout(){
@@ -56,15 +57,12 @@ function Home() {
       
     
   return (
+
+    
+    
     <div className="Register">
-        <nav>
-            <div class="links">
-                <Link to="/register" className="link">Register</Link>
-                {/* <Link to="/register" className="link">Login</Link> */}
-            </div>
-            
-        
-        </nav>
+       
+          <nav><Link to="/register" className="link">register</Link> </nav>
 
          <h1>Welcome to Home</h1>
              
@@ -90,14 +88,20 @@ function Home() {
              
             
          }
+
+
           </div> 
          
         
-      
-             
+         
+         
          </div> 
-    )
 
+        //  </Base>
+        
+    )
+    
+   
    
 }
 

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useParam} from 'react';
 import { Form, Link } from 'react-router-dom';
 import './Register.css';
 // import axios from  './api';
@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal,Button, ModalBody, ModalHeader,ModalFooter,FormGroup} from 'reactstrap';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import Base from './components/Base';
 
 function Dashboard(args) {
 
@@ -21,8 +22,11 @@ function Dashboard(args) {
          const[modal1,setModal1]=useState(false);
          const [userdata,setUserdata]=useState(null);
          const navigate=useNavigate();
-          // const [id,setId]=useState(0);
 
+         const [loading, setLoading] = useState(true);
+        //  const[id]=useParam();
+          // const [id,setId]=useState(0);
+         const[issuebookData,setIssueBookData]=useState([]);
 
          const[bookName,setbookName]=useState("");
          const[bookPages,setbookPages]=useState("");
@@ -70,7 +74,7 @@ function Dashboard(args) {
          const logout= async (e)=>{
                 e.preventDefault();
 
-             const res= await fetch(`http://localhost:8080/logout/${user.email}`,{
+             const res= await fetch(`http://localhost:8088/logout/${user.email}`,{
                  method:'PUT',
              }
                
@@ -212,6 +216,25 @@ function Dashboard(args) {
           console.log("some thing error try again!!"+error);
       })
   },[])
+
+     
+     function deleteRow(id,e){
+        e.preventDefault();
+        axios.delete(`http://localhost:8088/delete/book/${id}`)
+         const item=document.getElementById(`${id}`);
+         item.remove();
+        setLoading(false);
+          // alert(id);
+     }
+
+     useEffect(()=>{
+             axios.get(`http://localhost:8088/get/issuebooks`).then(res=>{
+              setIssueBookData(res.data);
+             
+            }).catch(error=>{
+                  alert("some thing errro");
+            })
+     })
   
 
 
@@ -219,8 +242,9 @@ function Dashboard(args) {
       //  var curuser=data;
 
   return (
+   
     <div className="Register">
-      
+          
            <nav>
             
             <div class="nav-com">
@@ -448,7 +472,11 @@ function Dashboard(args) {
             
           </table> */}
 
-<h2>Book reponse</h2>
+<br/>
+<br/>
+
+<h2>Available Book Detail</h2>
+
            <table>
                
                  <thead>
@@ -461,6 +489,8 @@ function Dashboard(args) {
                           <th>publisherName</th>
                           <th>publishDate</th>
                           <th>availableBook</th>
+                          <th>UpdateBook</th>
+                          <th>DeleteBook</th>
                        </tr>
                  </thead>
 
@@ -480,8 +510,8 @@ function Dashboard(args) {
                                 Update Book
                              </Button> */}
                              {/* <button onClick={toggle}/> */}
-                             <button id="btn12"  onClick={(e)=>updateRow(book.bookId,e)}>update</button>
-                             
+                            <td><button id="btn12"  onClick={(e)=>updateRow(book.bookId,e)}>update</button></td> 
+                             <td><button id={book.bookId} className='btn2' onClick={(e)=>deleteRow(book.bookId,e)}>Delete</button></td>
                             
                         </tr>
                      })
@@ -489,11 +519,67 @@ function Dashboard(args) {
                         
                  </tbody>
            </table>
+            <br/>
+            <br/>
           
-        
+          
+          <div>
+          <h1>Issued Book Detail</h1>
+
+
+              
+           <table>
+               
+               <thead>
+                      <tr>
+                        <th>Book ID</th>
+                        <th>bookName</th>
+                        <th>bookPice</th>
+                        <th>Book Issue Date</th>
+                        <th>Isssue for Days</th>
+                        <th>Number of Book isssued</th>
+                        <th>UserId</th>
+                        <th>UserName</th>
+                        <th>User Email</th>
+                     </tr>
+               </thead>
+
+               <tbody>
+                  {
+                   issuebookData.map((book)=>{
+                      return <tr id={book.bookId}>
+                           <td>{book.id}</td> 
+                           <td>{book.bookName}</td>
+                           <td>{book.totalBookPrice}</td>  
+                           <td>{book.issueDate}</td> 
+                           <td>{book.numberofDays}</td>
+                           <td>{book.numberofbookissued}</td>
+                           <td>{book.userId}</td> 
+                           <td>{book.userName}</td> 
+                           <td>{book.userEmail}</td>
+                           {/* <Button color="danger" onClick={toggle}>
+                              Update Book
+                           </Button> */}
+                           {/* <button onClick={toggle}/> */}
+                          {/* <td><button id="btn12"  onClick={(e)=>updateRow(book.bookId,e)}>update</button></td> 
+                           <td><button id={book.bookId} className='btn2' onClick={(e)=>deleteRow(book.bookId,e)}>Delete</button></td> */}
+                          
+                      </tr>
+                   })
+                  }
+                      
+               </tbody>
+         </table>
+
+
+
+          </div>
+          
+             
           
         
        </div>
+       
   );
 }
 

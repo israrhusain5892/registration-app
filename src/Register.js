@@ -29,7 +29,7 @@ function Register() {
             
 
         try{
-            await axios.post('http://localhost:8080/add/user',{
+            await axios.post('http://localhost:8088/add/user',{
               method:'POST',
               
                name:name,

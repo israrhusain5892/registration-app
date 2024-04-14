@@ -7,6 +7,7 @@ import { redirect } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import { userData } from './services';
 import { doLogin } from './Auth';
+import Base from './components/Base';
 // import ReactDOM from "react-dom/client";
 // export {showUser} from './Login';
 import { Axios } from 'axios';
@@ -25,7 +26,7 @@ function Login() {
       //   const[time,setTime]=useState("");
 
        async function getusers(){
-         const res=await axios('http://localhost:8080/get/users')
+         const res=await axios('http://localhost:8088/get/users')
          setSada(res.data)
          // console.log(res);
      }
@@ -69,6 +70,7 @@ function Login() {
             
       
   return (
+   
     <div className="Register">
           <nav>
              <Link to="/register" className="link">register</Link>
@@ -102,6 +104,7 @@ function Login() {
          
          
     </div>
+   //  </Base>
     
   );
 }

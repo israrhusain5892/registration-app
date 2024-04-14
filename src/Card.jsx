@@ -18,15 +18,15 @@ function Card() {
       
     const user=JSON.parse(localStorage.getItem("data"));
 
-    async function getuser1(){
-        const res2 =await axios.get(`http://localhost:8080/find/user/${user.email}`);
+    // async function getuser1(){
+    //     const res2 =await axios.get(`http://localhost:8080/find/user/${user.email}`);
         
-             setData(res2.data)
-        }
+    //          setData(res2.data)
+    //     }
            
-     useEffect( ()=>{
-         getuser1();
-     },[])
+    //  useEffect( ()=>{
+    //      getuser1();
+    //  },[])
 
 
       function logout(){
@@ -84,7 +84,7 @@ function Card() {
                     <h5>publisherName:{prod.publisherName}</h5> 
                     <h5>BookAvailable:{prod.availableBook}</h5> 
                     <p><h5>Description:</h5> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio, inventore corrupti atque enim ipsa harum magni velit est odit distinctio ad non in id sapiente voluptatum saepe iusto asperiores commodi!</p>
-                    <button>Buy Now</button>
+                    <button>Issue Book</button>
                   </div>
                     
              </div>
